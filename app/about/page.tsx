@@ -7,7 +7,7 @@ export default function AboutPage() {
       <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="font-serif text-2xl font-bold text-foreground">
-            Verdant
+            UseVerdant
           </Link>
           <Link href="/">
             <Button variant="ghost">← Back to Home</Button>
@@ -17,11 +17,11 @@ export default function AboutPage() {
 
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-serif text-4xl lg:text-6xl font-bold text-foreground mb-8">About Verdant</h1>
+          <h1 className="font-serif text-4xl lg:text-6xl font-bold text-foreground mb-8">About UseVerdant</h1>
 
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Verdant was born from a simple idea: everyone should be able to connect with the natural world around
+              UseVerdant was born from a simple idea: everyone should be able to connect with the natural world around
               them, regardless of their botanical knowledge.
             </p>
 
@@ -47,14 +47,21 @@ export default function AboutPage() {
             <div className="bg-muted/50 rounded-lg p-8 mb-12">
               <h2 className="text-2xl font-bold text-foreground mb-4">Our Story</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in 2024 by a team of botanists, AI researchers, and nature enthusiasts, Verdant combines
-                cutting-edge machine learning with comprehensive botanical databases to create the most accurate plant
-                identification app available.
+                UseVerdant was founded in 2024 by Ehsan (16) and Pranav (15), two passionate environmental advocates who
+                met through their school's environmental club. Their shared love for nature and competitive spirit in
+                Envirothon competitions sparked the idea for an AI-powered plant identification app.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Through countless hours spent studying ecosystems and participating in environmental competitions, Ehsan
+                and Pranav realized that many people struggle to identify the plants around them. They saw an
+                opportunity to bridge this knowledge gap using technology, making botanical expertise accessible to
+                everyone.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Our team has spent years training our AI models on millions of plant images, working with botanical
-                experts worldwide to ensure accuracy and reliability. We're committed to making plant identification not
-                just accurate, but also educational and inspiring.
+                What started as a school project has evolved into a comprehensive platform that combines their
+                environmental knowledge with cutting-edge AI technology. Their goal is to inspire others to connect with
+                nature the same way their environmental club and Envirothon experiences connected them to the natural
+                world.
               </p>
             </div>
 
