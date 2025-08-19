@@ -326,11 +326,11 @@ export default function VerdantLanding() {
               </div>
             </div>
 
-            <div className="relative animate-on-scroll flex justify-center lg:justify-end">
+            <div className="relative animate-on-scroll flex justify-center lg:justify-center">
               <div className="relative z-10" ref={heroImageRef}>
                 <div className="relative w-full max-w-4xl mx-auto">
                   {/* Container for both phones positioned side by side cleanly */}
-                  <div className="relative flex items-start justify-end gap-2 sm:gap-3 lg:gap-4 pr-4 sm:pr-8 lg:pr-12">
+                  <div className="relative flex items-start justify-center gap-2 sm:gap-3 lg:gap-4 pl-4 sm:pl-8 lg:pl-16">
                     {/* First phone - Scanner Screen */}
                     <div
                       className="relative bg-gray-900 rounded-[2rem] p-2 shadow-2xl drop-shadow-2xl w-[260px] sm:w-[300px] lg:w-[320px] h-[30rem] sm:h-[34rem] lg:h-[36rem] z-40"
