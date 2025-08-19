@@ -166,6 +166,187 @@ export default function VerdantLanding() {
     setShowSecret(true)
   }
 
+  const PhoneScreens = ({ isMobile = false }: { isMobile?: boolean }) => (
+    <div className="relative z-10 w-full max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl" ref={heroImageRef}>
+      <div className="relative">
+        {/* Keep side-by-side layout at all screen sizes, just scale down */}
+        <div className={`flex items-start justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 ${isMobile ? 'pl-2 sm:pl-4 md:pl-8' : 'pl-2 sm:pl-4 md:pl-8 lg:pl-16'}`}>
+          {/* First phone - Scanner Screen */}
+          <div
+            className={`relative bg-gray-900 rounded-[1rem] sm:rounded-[1.5rem] lg:rounded-[2rem] p-1 sm:p-1.5 lg:p-2 shadow-2xl drop-shadow-2xl ${isMobile ? 'w-[140px] sm:w-[180px] md:w-[220px] h-[17rem] sm:h-[21rem] md:h-[26rem]' : 'w-[140px] sm:w-[180px] md:w-[220px] lg:w-[280px] xl:w-[320px] h-[17rem] sm:h-[21rem] md:h-[26rem] lg:h-[32rem] xl:h-[36rem]'} z-40 flex-shrink-0`}
+            style={{ filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4))" }}
+          >
+            <div className="bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden w-full h-full relative">
+              <div className="relative flex-1 bg-gray-100 h-full overflow-hidden">
+                <div className="plant-container">
+                  {plants.map((plant, index) => (
+                    <img
+                      key={index}
+                      src={plant.image || "/placeholder.svg"}
+                      alt={`${plant.name} in camera view`}
+                      className={`plant-image ${index === currentPlantIndex ? "active" : "inactive"}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Camera scanning frame */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className={`relative ${isMobile ? 'w-20 sm:w-32 md:w-40' : 'w-20 sm:w-32 md:w-40 lg:w-48 xl:w-64'} ${isMobile ? 'h-16 sm:h-24 md:h-28' : 'h-16 sm:h-24 md:h-28 lg:h-32 xl:h-44'}`}>
+                    <div className="border-2 border-white rounded-lg w-full h-full shadow-lg">
+                      <div className="absolute -top-1 -left-1 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 border-l-4 border-t-4 border-white rounded-tl-lg"></div>
+                      <div className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 border-r-4 border-t-4 border-white rounded-tr-lg"></div>
+                      <div className="absolute -bottom-1 -left-1 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 border-l-4 border-b-4 border-white rounded-bl-lg"></div>
+                      <div className="absolute -bottom-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 border-r-4 border-b-4 border-white rounded-br-lg"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`absolute bottom-0 left-0 right-0 bg-white ${isMobile ? 'py-2 sm:py-3 md:py-4' : 'py-2 sm:py-3 md:py-4 lg:py-6'} flex justify-center items-center ${isMobile ? 'gap-2 sm:gap-4 md:gap-6' : 'gap-2 sm:gap-4 md:gap-6 lg:gap-8'}`}>
+                  <button className="bg-gray-100 rounded-lg px-1.5 py-1 sm:px-2 sm:py-1.5 md:px-3 md:py-2 flex items-center gap-2 touch-manipulation min-h-[32px] min-w-[32px] sm:min-h-[40px] sm:min-w-[40px]">
+                    <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={handleSecretClick}
+                    className={`${isMobile ? 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12' : 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16'} bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors cursor-pointer touch-manipulation`}
+                  >
+                    <div className={`${isMobile ? 'w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9' : 'w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 lg:w-12 lg:h-12'} border-2 border-white rounded-full`}></div>
+                  </button>
+                  <div className={`${isMobile ? 'w-3 sm:w-4 md:w-6' : 'w-3 sm:w-4 md:w-6 lg:w-8'}`}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Second phone - Details/Info Screen */}
+          <div className={`relative ${isMobile ? 'mt-2 sm:mt-4 md:mt-8' : 'mt-2 sm:mt-4 md:mt-8 lg:mt-12 xl:mt-16'}`}>
+            <div
+              className={`relative bg-gray-900 rounded-[1rem] sm:rounded-[1.5rem] lg:rounded-[2rem] p-1 sm:p-1.5 lg:p-2 shadow-2xl drop-shadow-2xl ${isMobile ? 'w-[140px] sm:w-[180px] md:w-[220px] h-[17rem] sm:h-[21rem] md:h-[26rem]' : 'w-[140px] sm:w-[180px] md:w-[220px] lg:w-[280px] xl:w-[320px] h-[17rem] sm:h-[21rem] md:h-[26rem] lg:h-[32rem] xl:h-[36rem]'} z-30 flex-shrink-0`}
+              style={{ filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4))" }}
+            >
+              <div className="bg-white rounded-[0.75rem] sm:rounded-[1.25rem] lg:rounded-[1.5rem] overflow-hidden w-full h-full relative">
+                <div className={`${isMobile ? 'p-2 sm:p-3 md:p-4' : 'p-2 sm:p-3 md:p-4 lg:p-6'} bg-white h-full flex flex-col overflow-y-auto`}>
+                  <div className={`flex items-center ${isMobile ? 'gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6' : 'gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6'}`}>
+                    <div className={`${isMobile ? 'w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10' : 'w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14'} rounded-full overflow-hidden bg-gray-100 flex-shrink-0`}>
+                      <img
+                        src={currentPlant.image || "/placeholder.svg"}
+                        alt={currentPlant.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className={`${isMobile ? 'text-[0.6rem] sm:text-xs md:text-sm' : 'text-[0.6rem] sm:text-xs md:text-sm lg:text-base xl:text-xl'} font-bold text-gray-800 truncate`}>{currentPlant.name}</h3>
+                      <p className={`${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-600 italic truncate`}>{currentPlant.scientific}</p>
+                    </div>
+                    <div className="flex gap-0.5 sm:gap-1 flex-shrink-0">
+                      <div className={`${isMobile ? 'w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5' : 'w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6'} bg-gray-200 rounded flex items-center justify-center`}>
+                        <svg className={`${isMobile ? 'w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5' : 'w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3'}`} fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 2l3 8h8l-6.5 5 2.5 8L9 18l-7 5 2.5-8L-2 10h8L9 2z" />
+                        </svg>
+                      </div>
+                      <div className={`${isMobile ? 'w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5' : 'w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6'} bg-gray-200 rounded flex items-center justify-center`}>
+                        <svg className={`${isMobile ? 'w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5' : 'w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3'}`} fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.50-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={`${isMobile ? 'mb-1 sm:mb-2 md:mb-3' : 'mb-1 sm:mb-2 md:mb-3 lg:mb-4'}`}>
+                    <p className={`${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-700 leading-relaxed`}>{currentPlant.description}</p>
+                  </div>
+
+                  <div className={`${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-600 mb-1 sm:mb-2 md:mb-3`}>
+                    <span className="font-semibold">Scientific name:</span> {currentPlant.scientific}
+                  </div>
+
+                  <div className={`${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-600 mb-1 sm:mb-2 md:mb-3`}>
+                    <span className="font-semibold">Family:</span> {currentPlant.family}
+                  </div>
+
+                  <div className={`${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-600 mb-2 sm:mb-3 md:mb-4`}>
+                    <span className="font-semibold">Native to:</span> {currentPlant.native}
+                  </div>
+
+                  <div className={`space-y-1 sm:space-y-2 md:space-y-3 ${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-600 mb-2 sm:mb-4 md:mb-6`}>
+                    <h4 className="font-semibold text-gray-800">Key Characteristics:</h4>
+                    {currentPlant.characteristics.map((characteristic, index) => (
+                      <div key={index} className="flex items-center gap-1 sm:gap-2 md:gap-3 p-1 sm:p-1.5 md:p-2 bg-gray-50 rounded-lg">
+                        <div
+                          className={`${isMobile ? 'w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5' : 'w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 lg:w-3 lg:h-3'} bg-${characteristic.color}-500 rounded-full flex-shrink-0`}
+                        ></div>
+                        <span className={`text-gray-700 ${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'}`}>{characteristic.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={`${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm'} text-gray-600 mb-2 sm:mb-3 md:mb-4 font-medium`}>
+                    More examples of {currentPlant.name}
+                  </div>
+
+                  <div className="mt-auto">
+                    <button className={`w-full bg-blue-500 hover:bg-blue-600 text-white ${isMobile ? 'text-[0.5rem] sm:text-[0.6rem] md:text-xs py-1.5 sm:py-2 md:py-2.5' : 'text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm py-1.5 sm:py-2 md:py-2.5 lg:py-3'} rounded-lg font-medium flex items-center justify-center gap-2 transition-colors touch-manipulation ${isMobile ? 'min-h-[24px] sm:min-h-[32px] md:min-h-[40px]' : 'min-h-[24px] sm:min-h-[32px] md:min-h-[40px]'}`}>
+                      + Add to My Collection
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Information bubbles positioned around the second phone - only show on very large screens and desktop */}
+              {!isMobile && (
+                <>
+                  <div className="hidden 2xl:block absolute -right-16 top-8 bg-white rounded-lg shadow-xl p-3 border border-gray-200 z-40 w-36">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-800">Non-toxic</p>
+                        <p className="text-xs text-gray-600">to humans</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="hidden 2xl:block absolute -right-20 top-24 bg-white rounded-lg shadow-xl p-3 border border-gray-200 z-40 w-36">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                        <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L22 9.27l-5 4.87 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-800">Beneficial</p>
+                        <p className="text-xs text-gray-600">to ecosystem</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="hidden 2xl:block absolute -right-24 top-40 bg-white rounded-lg shadow-xl p-3 border border-gray-200 z-40 w-36">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg className="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-800">Easy care</p>
+                        <p className="text-xs text-gray-600">low maintenance</p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl -z-10"></div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-background">
       {showSecret && (
@@ -300,7 +481,42 @@ export default function VerdantLanding() {
         </div>
         
         <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-24 max-w-7xl">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-12 xl:gap-16 items-center min-h-[calc(100vh-4rem)] sm:min-h-[80vh]">
+          {/* Mobile Layout: Text at top, phones at bottom */}
+          <div className="flex flex-col gap-8 sm:gap-12 items-center min-h-[calc(100vh-4rem)] justify-between lg:hidden">
+            {/* Text Content Section - Mobile: at the top */}
+            <div className="space-y-6 sm:space-y-8 animate-on-scroll flex flex-col justify-center text-center w-full pt-4 sm:pt-8 flex-shrink-0">
+              <div className="space-y-4 sm:space-y-6">
+                <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight leading-none">
+                  {t("hero.title")}
+                </h1>
+                <p className="text-lg sm:text-xl md:text-2xl text-black font-semibold tracking-wide">{t("hero.subtitle")}</p>
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl font-bold mx-auto">
+                  {typedText}
+                  {!isTypingComplete && <span className="animate-pulse">|</span>}
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button
+                  size="lg"
+                  className="bg-green-600 hover:bg-green-700 text-white font-medium px-8 sm:px-10 py-4 sm:py-5 text-base sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto min-h-[48px] touch-manipulation"
+                >
+                  <svg className="w-6 h-6 sm:w-7 sm:h-7 mr-2 sm:mr-3" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                  </svg>
+                  {t("hero.download")}
+                </Button>
+              </div>
+            </div>
+
+            {/* Phone Screens Section - Mobile: at the bottom */}
+            <div className="relative animate-on-scroll flex justify-center items-end w-full pb-4 sm:pb-8 flex-grow">
+              <PhoneScreens isMobile={true} />
+            </div>
+          </div>
+
+          {/* Desktop Layout: Text on left, phones on right (original layout) */}
+          <div className="hidden lg:flex lg:grid lg:grid-cols-2 gap-8 sm:gap-12 xl:gap-16 items-center min-h-[calc(100vh-4rem)] sm:min-h-[80vh]">
             <div className="space-y-6 sm:space-y-8 animate-on-scroll flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left">
               <div className="space-y-4 sm:space-y-6">
                 <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground tracking-tight leading-none">
@@ -327,180 +543,7 @@ export default function VerdantLanding() {
             </div>
 
             <div className="relative animate-on-scroll flex justify-center order-1 lg:order-2 w-full">
-              <div className="relative z-10 w-full max-w-2xl lg:max-w-4xl" ref={heroImageRef}>
-                <div className="relative">
-                  {/* Mobile: Stack phones vertically, Desktop: Side by side */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-2 md:gap-3 lg:gap-4 sm:pl-4 md:pl-8 lg:pl-16">
-                    {/* First phone - Scanner Screen */}
-                    <div
-                      className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-2xl drop-shadow-2xl w-[200px] sm:w-[220px] md:w-[260px] lg:w-[300px] xl:w-[320px] h-[24rem] sm:h-[26rem] md:h-[30rem] lg:h-[34rem] xl:h-[36rem] z-40 flex-shrink-0"
-                      style={{ filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4))" }}
-                    >
-                      <div className="bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden w-full h-full relative">
-                        <div className="relative flex-1 bg-gray-100 h-full overflow-hidden">
-                          <div className="plant-container">
-                            {plants.map((plant, index) => (
-                              <img
-                                key={index}
-                                src={plant.image || "/placeholder.svg"}
-                                alt={`${plant.name} in camera view`}
-                                className={`plant-image ${index === currentPlantIndex ? "active" : "inactive"}`}
-                              />
-                            ))}
-                          </div>
-
-                          {/* Camera scanning frame */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="relative w-32 sm:w-40 md:w-48 lg:w-64 h-24 sm:h-28 md:h-32 lg:h-44">
-                              <div className="border-2 border-white rounded-lg w-full h-full shadow-lg">
-                                <div className="absolute -top-1 -left-1 w-3 h-3 sm:w-4 sm:h-4 border-l-4 border-t-4 border-white rounded-tl-lg"></div>
-                                <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 border-r-4 border-t-4 border-white rounded-tr-lg"></div>
-                                <div className="absolute -bottom-1 -left-1 w-3 h-3 sm:w-4 sm:h-4 border-l-4 border-b-4 border-white rounded-bl-lg"></div>
-                                <div className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 border-r-4 border-b-4 border-white rounded-br-lg"></div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="absolute bottom-0 left-0 right-0 bg-white py-3 sm:py-4 md:py-6 flex justify-center items-center gap-4 sm:gap-6 md:gap-8">
-                            <button className="bg-gray-100 rounded-lg px-2 py-1.5 sm:px-3 sm:py-2 flex items-center gap-2 touch-manipulation min-h-[40px] min-w-[40px]">
-                              <svg className="w-3 h-3 sm:w-4 sm:h-4 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
-                              </svg>
-                            </button>
-                            <button
-                              onClick={handleSecretClick}
-                              className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors cursor-pointer touch-manipulation"
-                            >
-                              <div className="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 border-2 border-white rounded-full"></div>
-                            </button>
-                            <div className="w-4 sm:w-6 md:w-8"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Second phone - Details/Info Screen */}
-                    <div className="relative mt-4 sm:mt-8 md:mt-12 lg:mt-16">
-                      <div
-                        className="relative bg-gray-900 rounded-[1.5rem] sm:rounded-[2rem] p-1.5 sm:p-2 shadow-2xl drop-shadow-2xl w-[200px] sm:w-[220px] md:w-[260px] lg:w-[300px] xl:w-[320px] h-[24rem] sm:h-[26rem] md:h-[30rem] lg:h-[34rem] xl:h-[36rem] z-30 flex-shrink-0"
-                        style={{ filter: "drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4))" }}
-                      >
-                        <div className="bg-white rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden w-full h-full relative">
-                          <div className="p-3 sm:p-4 md:p-6 bg-white h-full flex flex-col overflow-y-auto">
-                            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
-                                <img
-                                  src={currentPlant.image || "/placeholder.svg"}
-                                  alt={currentPlant.name}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h3 className="text-sm sm:text-base md:text-xl font-bold text-gray-800 truncate">{currentPlant.name}</h3>
-                                <p className="text-xs sm:text-sm text-gray-600 italic truncate">{currentPlant.scientific}</p>
-                              </div>
-                              <div className="flex gap-1 flex-shrink-0">
-                                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-200 rounded flex items-center justify-center">
-                                  <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 2l3 8h8l-6.5 5 2.5 8L9 18l-7 5 2.5-8L-2 10h8L9 2z" />
-                                  </svg>
-                                </div>
-                                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-200 rounded flex items-center justify-center">
-                                  <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.50-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="mb-3 sm:mb-4">
-                              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">{currentPlant.description}</p>
-                            </div>
-
-                            <div className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
-                              <span className="font-semibold">Scientific name:</span> {currentPlant.scientific}
-                            </div>
-
-                            <div className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
-                              <span className="font-semibold">Family:</span> {currentPlant.family}
-                            </div>
-
-                            <div className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
-                              <span className="font-semibold">Native to:</span> {currentPlant.native}
-                            </div>
-
-                            <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
-                              <h4 className="font-semibold text-gray-800">Key Characteristics:</h4>
-                              {currentPlant.characteristics.map((characteristic, index) => (
-                                <div key={index} className="flex items-center gap-2 sm:gap-3 p-1.5 sm:p-2 bg-gray-50 rounded-lg">
-                                  <div
-                                    className={`w-2.5 h-2.5 sm:w-3 sm:h-3 bg-${characteristic.color}-500 rounded-full flex-shrink-0`}
-                                  ></div>
-                                  <span className="text-gray-700 text-xs sm:text-sm">{characteristic.text}</span>
-                                </div>
-                              ))}
-                            </div>
-
-                            <div className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 font-medium">
-                              More examples of {currentPlant.name}
-                            </div>
-
-                            <div className="mt-auto">
-                              <button className="w-full bg-blue-500 hover:bg-blue-600 text-white text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors touch-manipulation min-h-[40px]">
-                                + Add to My Collection
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Information bubbles positioned around the second phone - only show on very large screens */}
-                        <div className="hidden 2xl:block absolute -right-16 top-8 bg-white rounded-lg shadow-xl p-3 border border-gray-200 z-40 w-36">
-                          <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                              <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold text-gray-800">Non-toxic</p>
-                              <p className="text-xs text-gray-600">to humans</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="hidden 2xl:block absolute -right-20 top-24 bg-white rounded-lg shadow-xl p-3 border border-gray-200 z-40 w-36">
-                          <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
-                              <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2L22 9.27l-5 4.87 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold text-gray-800">Beneficial</p>
-                              <p className="text-xs text-gray-600">to ecosystem</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="hidden 2xl:block absolute -right-24 top-40 bg-white rounded-lg shadow-xl p-3 border border-gray-200 z-40 w-36">
-                          <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
-                              <svg className="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                              </svg>
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold text-gray-800">Easy care</p>
-                              <p className="text-xs text-gray-600">low maintenance</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl -z-10"></div>
-              </div>
+              <PhoneScreens isMobile={false} />
             </div>
           </div>
         </div>
@@ -590,7 +633,7 @@ export default function VerdantLanding() {
                     className="hover:text-foreground transition-colors text-sm sm:text-base flex items-center gap-2 justify-center sm:justify-start py-1 touch-manipulation min-h-[44px]"
                   >
                     <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.33-1.297C4.198 14.81 3.708 13.659 3.708 12.362c0-1.297.49-2.448 1.297-3.33c.881-.881 2.033-1.371 3.33-1.371c1.297 0 2.448.49 3.33 1.371c.881.882 1.371 2.033 1.371 3.33c0 1.297-.49 2.448-1.371 3.33c-.882.807-2.033 1.297-3.33 1.297zm7.598 0c-1.297 0-2.448-.49-3.33-1.297c-.881-.882-1.371-2.033-1.371-3.33c0-1.297.49-2.448 1.371-3.33c.882-.881 2.033-1.371 3.33-1.371c1.297 0 2.448.49 3.33 1.371c.881.882 1.371 2.033 1.371 3.33c0 1.297-.49 2.448-1.371 3.33c-.882.807-2.033 1.297-3.33 1.297z"/>
+                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.33-1.297C4.198 14.81 3.708 13.659 3.708 12.362c0-1.297.49-2.448 1.297-3.33c.881-.881 2.033-1.371 3.33-1.371c1.297 0 2.448.49 3.33 1.371c.881.882 1.371 2.033 1.371 3.33c0 1.297-.49 2.448-1.371 3.33c-.882.807-2.033 1.297-3.33 1.297zm7.598 0c-1.297 0-2.448-.49-3.33-1.297c-.881-.882-1.371-2.033-1.371-3.33c0-1.297.49-2.448 1.371-3.33c.882-.881 2.033-1.371 3.33-1.371c1.297 0 2.448.49 3.33 1.371c.881.882 1.371 2.033 1.371 3.33c0 1.297-.49 2.448-1.371 3.30c-.882.807-2.033 1.297-3.33 1.297z"/>
                     </svg>
                     Instagram
                   </a>
