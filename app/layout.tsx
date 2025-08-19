@@ -17,10 +17,11 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "Verdant - Plant Identification App",
+  title: "UseVerdant",
   description: "Snap a plant. Know instantly. Identify plants, learn their impact, and get expert insights.",
-  generator: "v0.app",
 }
+
+
 
 export default function RootLayout({
   children,
